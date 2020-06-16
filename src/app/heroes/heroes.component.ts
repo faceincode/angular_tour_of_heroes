@@ -21,7 +21,9 @@ export class HeroesComponent implements OnInit {
 
   getHeroes(): void {
     this.heroService.getHeroes()
-      .subscribe(heroes => this.heroes = heroes)
+      .subscribe(
+        heroes => this.heroes = heroes
+      )
   }
 
   add(name: string): void {
@@ -29,8 +31,18 @@ export class HeroesComponent implements OnInit {
     if(!name) { return; }
     this.heroService.addHero({name} as Hero)
       .subscribe(
-        hero => {this.heroes.push(hero);}
-      );
+        hero => this.heroes.push(hero)
+      )
+
+      // NOTE: Original implementation
+      // Uses slightly different syntax
+      // cb_lambda => {
+      //  exec_statement_1;
+      //  exec_statement_2;
+      // }
+      //.subscribe(
+      //  hero => {this.heroes.push(hero);}
+      //);
   }
 
   delete(hero: Hero): void {
